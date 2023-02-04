@@ -14,26 +14,16 @@ jobs:
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - run:  exit 1
-     
-
-  uses_fail:
-    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
-    docker:
-      - image: cimg/base:stable
-    steps:
       - run: 
           name: Upload Failed Tests
           command: echo "Hello Error!"
           when: on_fail
-        
+
+  
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   say-hello-error:
     jobs:
       - fails
-      - uses_fail:
-          requires:
-            - fails
-
+       
